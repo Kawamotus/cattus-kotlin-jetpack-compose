@@ -1,6 +1,5 @@
 package com.monkode.cattus.ui.screens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 //noinspection UsingMaterialAndMaterial3Libraries
@@ -20,6 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.monkode.cattus.R
+import com.monkode.cattus.ui.theme.Black400
+import com.monkode.cattus.ui.theme.Green300
+import CustomOutlinedTextField
+import com.monkode.cattus.ui.components.CustomButton
+import com.monkode.cattus.ui.theme.Purple400
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -29,11 +33,10 @@ fun LoginScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Black)
+            .background(color = Black400)
             .verticalScroll(rememberScrollState()),
 
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = painterResource(id = R.drawable.logo_cattus),
@@ -41,50 +44,19 @@ fun LoginScreen(navController: NavController) {
             modifier = Modifier.size(200.dp)
         )
 
-        OutlinedTextField(
+        CustomOutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("E-mail") },
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.width(300.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = Color.Gray,
-                focusedBorderColor = Color.White,
-                unfocusedBorderColor = Color.Gray,
-                textColor = Color.Black,
-                cursorColor = Color.Black,
-                focusedLabelColor = Color.White
-            )
+            label = "E-mail",
         )
 
-        OutlinedTextField(
+        CustomOutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Senha") },
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.width(300.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = Color.Gray,
-                focusedBorderColor = Color.White,
-                unfocusedBorderColor = Color.Gray,
-                textColor = Color.Black,
-                cursorColor = Color.Black,
-                focusedLabelColor = Color.White
-            )
+            label = "Senha",
         )
 
-        Button(
-            onClick = { /* Lógica de login */ },
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier
-                .width(300.dp)
-                .height(60.dp)
-                .padding(top = 8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF4CAF50),
-                )
-        ) {
-            Text("Entrar", color = Color.White)
-        }
+        CustomButton(onClick = {}, text = "Entrar", backgroundColor = Green300)
     }
 }
 
