@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.monkode.cattus.ui.theme.Gray100
 import com.monkode.cattus.ui.theme.Gray400
 
+
 data class BottomNavItem(
     val name: String,
     val icon: ImageVector,
@@ -23,9 +24,9 @@ fun BottomMenu(onNavItemClick: (String) -> Unit){
     //mudar itens, ta assim só pra testar
     val items = listOf(
         BottomNavItem("Início", Icons.Filled.Home, "home"),
-        BottomNavItem("Gatos", Icons.Filled.Search, "cats"),
+        BottomNavItem("Gatos", Icons.Filled.Pets, "cats"),
         BottomNavItem("Adicionar", Icons.Filled.Add, "add"),
-        BottomNavItem("Câmeras", Icons.Filled.LocationOn, "cameras"),
+        BottomNavItem("Câmeras", Icons.Filled.Videocam, "cameras"),
         BottomNavItem("Menu", Icons.Filled.Menu, "menu")
     )
 
