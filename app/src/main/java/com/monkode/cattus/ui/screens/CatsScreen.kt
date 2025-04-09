@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.monkode.cattus.ui.components.BottomMenu
+import com.monkode.cattus.ui.components.CatsTopAppBar
 import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.Green300
 
@@ -23,6 +24,7 @@ fun BaseScreen(
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
+        topBar = { CatsTopAppBar() },
         bottomBar = { BottomMenu(onNavItemClick = onNavItemClick) },
         content = { paddingValues ->
             Column(
@@ -40,7 +42,7 @@ fun BaseScreen(
 @Preview(showBackground = true)
 @Composable
 fun BaseScreenPreview() {
-    BaseScreen(onNavItemClick = {}, backgroundColor = Green300) { paddingValues ->
+    BaseScreen(onNavItemClick = {}, backgroundColor = Black400 ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             Text("Conteúdo da Tela")
             Text("Mais Conteúdo")

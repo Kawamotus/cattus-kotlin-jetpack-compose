@@ -18,11 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material.CircularProgressIndicator
 
 import com.monkode.cattus.R
+import com.monkode.cattus.ui.theme.Black400
 
 @Composable
 fun LoadingScreen() {
     Column(
-        modifier = Modifier.fillMaxSize().background(color = Color.Black),
+        modifier = Modifier.fillMaxSize().background(color = Black400),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
