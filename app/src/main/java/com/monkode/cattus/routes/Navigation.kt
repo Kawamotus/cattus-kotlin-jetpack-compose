@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.monkode.cattus.ui.screens.LoginScreen
+import com.monkode.cattus.ui.screens.MainScreen
 
 @Composable
 fun Navigation() {
@@ -12,10 +13,10 @@ fun Navigation() {
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") {
-            LoginScreen(navController);
+            LoginScreen(navController)
         }
-        composable("home") {
-
+        composable("mainscreen") {
+            MainScreen()
         }
     }
 }

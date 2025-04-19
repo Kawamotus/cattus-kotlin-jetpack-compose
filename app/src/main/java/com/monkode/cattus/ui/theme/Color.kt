@@ -19,3 +19,5 @@ val Gray400 = Color(0xFF3C3C3C)
 val Green300 = Color(0xFF639F61)
 
 val Purple400 = Color(0xFF6C1482)
+
+val White000 = Color(0xFFFFFFFF)

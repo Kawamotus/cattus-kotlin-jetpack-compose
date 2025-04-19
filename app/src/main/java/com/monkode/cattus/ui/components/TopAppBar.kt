@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Badge
@@ -37,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun CatsTopAppBar() {
     TopAppBar(
+        modifier = Modifier.statusBarsPadding(),
         title = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
