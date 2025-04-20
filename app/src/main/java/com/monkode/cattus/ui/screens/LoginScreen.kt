@@ -18,42 +18,89 @@ import com.monkode.cattus.R
 import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.Green300
 import CustomOutlinedTextField
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.monkode.cattus.api.viewmodel.AuthViewModel
+import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.ui.components.CustomButton
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, viewModel: AuthViewModel = viewModel()) {
+    val context = LocalContext.current
+    val sessionManager = remember { SessionManager(context) }
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val loginResult by viewModel.loginResult.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Black400)
-            .verticalScroll(rememberScrollState())
-        ,
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
 
-        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo_cattus),
-            contentDescription = "Logo Cattus",
-            modifier = Modifier.size(200.dp)
-        )
-
-        CustomOutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = "E-mail",
-        )
-
-        CustomOutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = "Senha",
-        )
-
-        CustomButton(onClick = { navController.navigate("mainscreen")}, text = "Entrar", backgroundColor = Green300)
+    LaunchedEffect(loginResult) {
+        loginResult?.let { response ->
+            if (!response.token.isNullOrEmpty()) {
+                sessionManager.saveToken(response.token)
+                navController.navigate("mainscreen") {
+                    popUpTo("login") { inclusive = true }
+                }
+            } else {
+                snackbarHostState.showSnackbar("Invalid Login")
+            }
+        }
     }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Black400)
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo_cattus),
+                contentDescription = "Logo Cattus",
+                modifier = Modifier.size(200.dp)
+            )
+
+            CustomOutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = "E-mail",
+            )
+
+            CustomOutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = "Senha",
+                visualTransformation = PasswordVisualTransformation()
+            )
+
+            CustomButton(
+                onClick = {
+                    viewModel.login(email, password) { error ->
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(error)
+                        }
+
+                    }
+                },
+                text = "Entrar",
+                backgroundColor = Green300
+            )
+        }
+    }
+
 }
 
 @Preview(showBackground = true)

@@ -1,0 +1,3 @@
+package com.monkode.cattus.constants
+
+val baseUrl = "http://192.168.10.72:8080/"
