@@ -5,8 +5,16 @@ data class LoginRequest(
     val employeePassword: String
 )
 
-data class LoginRespose(
+data class LoginResponse(
     val ok: Boolean,
     val message: String,
     val token: String
+)
+
+data class UserData(
+    val id: String?,
+    val name: String?,
+    val picture: String?,
+    val accessLevel: String?,
+    val company: String?,
 )

@@ -7,6 +7,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.input.VisualTransformation
 import com.monkode.cattus.ui.theme.Gray100
 import com.monkode.cattus.ui.theme.Gray400
@@ -18,7 +19,7 @@ fun CustomOutlinedTextField(
     label: String,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     modifier: Modifier = Modifier,
-    textStyle: TextStyle = TextStyle.Default.copy(fontSize = 20.sp)
+    textStyle: TextStyle = TextStyle.Default.copy(fontSize = 18.sp)
 ) {
     OutlinedTextField(
         value = value,
@@ -36,6 +37,6 @@ fun CustomOutlinedTextField(
             unfocusedLabelColor = Gray100
         ),
         textStyle = textStyle,
-        visualTransformation = visualTransformation
+        visualTransformation = visualTransformation,
     )
 }

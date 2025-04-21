@@ -25,19 +25,29 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.monkode.cattus.api.viewmodel.AuthViewModel
+import com.monkode.cattus.api.viewmodel.UserDataViewModel
 import com.monkode.cattus.storage.SessionManager
+import com.monkode.cattus.storage.UserDataManager
 import com.monkode.cattus.ui.components.CustomButton
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(navController: NavController, viewModel: AuthViewModel = viewModel()) {
+fun LoginScreen(
+    navController: NavController,
+    authViewModel: AuthViewModel = viewModel(),
+    userViewModel: UserDataViewModel = viewModel()
+) {
     val context = LocalContext.current
     val sessionManager = remember { SessionManager(context) }
+    val userDataManager = remember { UserDataManager(context) }
+
+    var isLoading by remember { mutableStateOf(false) }
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val loginResult by viewModel.loginResult.collectAsState()
+
+    val loginResult by authViewModel.loginResult.collectAsState()
+    val userDataResult by userViewModel.userDataResult.collectAsState()
 
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
@@ -46,6 +56,11 @@ fun LoginScreen(navController: NavController, viewModel: AuthViewModel = viewMod
         loginResult?.let { response ->
             if (!response.token.isNullOrEmpty()) {
                 sessionManager.saveToken(response.token)
+                userViewModel.getUserData(response.token,context) { error ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(error)
+                    }
+                }
                 navController.navigate("mainscreen") {
                     popUpTo("login") { inclusive = true }
                 }
@@ -55,52 +70,74 @@ fun LoginScreen(navController: NavController, viewModel: AuthViewModel = viewMod
         }
     }
 
-    Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = Black400)
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo_cattus),
-                contentDescription = "Logo Cattus",
-                modifier = Modifier.size(200.dp)
-            )
+    LaunchedEffect(userDataResult) {
+        userDataResult?.let { response ->
+            if (!response.name.isNullOrEmpty()) {
+                userDataManager.saveUserData(
+                    response.id!!,
+                    response.name,
+                    response.picture!!,
+                    response.accessLevel.toString()!!,
+                    response.company!!
+                )
 
-            CustomOutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = "E-mail",
-            )
-
-            CustomOutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = "Senha",
-                visualTransformation = PasswordVisualTransformation()
-            )
-
-            CustomButton(
-                onClick = {
-                    viewModel.login(email, password) { error ->
-                        coroutineScope.launch {
-                            snackbarHostState.showSnackbar(error)
-                        }
-
-                    }
-                },
-                text = "Entrar",
-                backgroundColor = Green300
-            )
+            }
         }
     }
 
+
+
+    if (isLoading) {
+        LoadingScreen()
+    } else {
+        Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = Black400)
+                    .verticalScroll(rememberScrollState())
+                    .padding(innerPadding),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.logo_cattus),
+                    contentDescription = "Logo Cattus",
+                    modifier = Modifier.size(200.dp)
+                )
+
+                CustomOutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = "E-mail",
+                )
+
+                CustomOutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = "Senha",
+                    visualTransformation = PasswordVisualTransformation()
+                )
+
+                CustomButton(
+                    onClick = {
+                        isLoading = true
+                        authViewModel.login(email, password, context) { error ->
+                            coroutineScope.launch {
+                                snackbarHostState.showSnackbar(error)
+                                isLoading = false
+                            }
+                            isLoading = false
+                        }
+                    },
+                    text = "Entrar",
+                    backgroundColor = Green300
+                )
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)
