@@ -1,6 +1,5 @@
 package com.monkode.cattus.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
@@ -11,7 +10,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Badge
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.BadgedBox
-import androidx.compose.material.Colors
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Icon
 //noinspection UsingMaterialAndMaterial3Libraries
@@ -22,21 +20,37 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Tune
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.monkode.cattus.R
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.monkode.cattus.ui.theme.Black400
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImage
+import com.monkode.cattus.api.models.UserData
+import com.monkode.cattus.storage.UserDataManager
 
 @Composable
 fun CatsTopAppBar() {
+    val context = LocalContext.current
+    val userDataManager = UserDataManager(context)
+
+    var userData by  remember { mutableStateOf<UserData?>(null) }
+
+    LaunchedEffect(Unit) {
+        userData = userDataManager.getUserData()
+    }
+
     TopAppBar(
         modifier = Modifier.statusBarsPadding(),
         title = {
@@ -44,14 +58,11 @@ fun CatsTopAppBar() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.profile_picture), //deixar dinamico
+                AsyncImage(
+                    model = userData?.picture,
                     contentDescription = "Profile picture",
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clip(
-                            CircleShape
-                        )
+                    modifier = Modifier.size(36.dp).clip(CircleShape),
+                    contentScale = ContentScale.Crop
                 )
                 Text("Gatinhos miau", color = Color.White) //deixar dinamico
             }
