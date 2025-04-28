@@ -56,7 +56,7 @@ fun LoginScreen(
         loginResult?.let { response ->
             if (!response.token.isNullOrEmpty()) {
                 sessionManager.saveToken(response.token)
-                userViewModel.getUserData(response.token,context) { error ->
+                userViewModel.getUserData(response.token, context) { error ->
                     coroutineScope.launch {
                         snackbarHostState.showSnackbar(error)
                     }

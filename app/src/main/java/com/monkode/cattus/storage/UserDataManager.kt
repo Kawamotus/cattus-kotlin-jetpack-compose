@@ -41,6 +41,12 @@ class UserDataManager(private val context: Context) {
         }.first()
     }
 
+    suspend fun getCompany(): String? {
+        return context.dataStore.data.map { prefs ->
+            prefs[USER_COMPANY]
+        }.first()
+    }
+
     suspend fun clearUserData() {
         context.dataStore.edit { prefs ->
             prefs.remove(USER_ID)
