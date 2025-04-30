@@ -8,7 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.monkode.cattus.ui.components.LazyCardCat
+
 import com.monkode.cattus.ui.theme.White000
 
 @Composable
@@ -18,6 +18,6 @@ fun CatsList() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LazyCardCat()
+
     }
 }
