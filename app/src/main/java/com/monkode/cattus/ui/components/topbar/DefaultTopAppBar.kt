@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.topbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.monkode.cattus.R
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.monkode.cattus.ui.theme.Black400
@@ -41,7 +40,7 @@ import com.monkode.cattus.api.models.UserData
 import com.monkode.cattus.storage.UserDataManager
 
 @Composable
-fun CatsTopAppBar() {
+fun DefaultTopAppBar(title: String = "Home") {
     val context = LocalContext.current
     val userDataManager = UserDataManager(context)
 
@@ -64,7 +63,7 @@ fun CatsTopAppBar() {
                     modifier = Modifier.size(36.dp).clip(CircleShape),
                     contentScale = ContentScale.Crop
                 )
-                Text("Gatinhos miau", color = Color.White) //deixar dinamico
+                Text(title, color = Color.White) //deixar dinamico
             }
         },
         actions = {
@@ -99,5 +98,5 @@ fun CatsTopAppBar() {
 @Preview(showBackground = true)
 @Composable
 fun CatsTopAppBarPreview() {
-    CatsTopAppBar()
+    DefaultTopAppBar()
 }

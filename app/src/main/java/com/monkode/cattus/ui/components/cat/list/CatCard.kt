@@ -1,11 +1,8 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.cat.list
 
-import android.util.Log
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,11 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
@@ -25,45 +18,29 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.monkode.cattus.api.models.CatData
-import com.monkode.cattus.api.viewmodel.GetAllCatsViewModel
-import com.monkode.cattus.storage.SessionManager
-import com.monkode.cattus.ui.screens.LoadingScreen
+import coil.request.ImageRequest
 import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.Purple400
 import com.monkode.cattus.ui.theme.White000
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import com.monkode.cattus.R
+import com.monkode.cattus.api.models.CatData
 
 @Composable
-fun CardCat() { //passar os dados do gato como parametro pra montar o card
-    val imgTest =
-        "https://images.unsplash.com/photo-1543852786-1cf6624b9987?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0c3xlbnwwfHwwfHx8MA%3D%3D"
+fun CardCat(cat: CatData) { //passar os dados do gato como parametro pra montar o card
 
     Card( //adicionar parametros e deixar tudo dinâmico
         modifier = Modifier
@@ -74,14 +51,31 @@ fun CardCat() { //passar os dados do gato como parametro pra montar o card
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Box(modifier = Modifier.height(180.dp).background(Black400)) {
-            Image(
-                painter = painterResource(id = (R.drawable.cat_test)),
-                contentDescription = "miauuuu",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp))
-            )
+            val context = LocalContext.current
+            val hasImage = !cat.petPicture.isNullOrBlank()
+
+            if (hasImage) {
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(cat.petPicture)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = cat.petName,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp))
+                )
+            } else {
+                Image(
+                    painter = painterResource(id = R.drawable.cat_test),
+                    contentDescription = "Imagem padrão do gato",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp))
+                )
+            }
 
             Icon(
                 imageVector = Icons.Default.Circle,
@@ -108,35 +102,17 @@ fun CardCat() { //passar os dados do gato como parametro pra montar o card
                 .padding(8.dp)
         ) {
             Column(modifier = Modifier.padding(0.dp)) {
-                Text("Nome do bicho", fontSize = 12.sp, style = TextStyle(color = White000))
-                Text("Macho de 25 anos", fontSize = 12.sp, style = TextStyle(color = White000))
-                Text("CID: Númerozao", fontSize = 12.sp, style = TextStyle(color = White000))
+                Text(cat.petName!!, fontSize = 12.sp, style = TextStyle(color = White000))
+                Text("${cat.petGender}", fontSize = 12.sp, style = TextStyle(color = White000))
+                Text("CID: ${cat._id}", fontSize = 12.sp, style = TextStyle(color = White000))
             }
         }
 
-
-
-
     }
 
 }
 
-@Preview
-@Composable
-fun CardCatPreview() {
-    Column(modifier = Modifier.fillMaxSize().background(Black400)) {
-        Row {
-            CardCat()
-            CardCat()
-        }
-        Row {
-            CardCat()
-            CardCat()
-        }
 
-    }
-
-}
 
 /*
 @Composable

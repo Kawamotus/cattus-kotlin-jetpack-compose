@@ -16,7 +16,7 @@ fun Navigation() {
             LoginScreen(navController)
         }
         composable("mainscreen") {
-            MainScreen()
+            MainScreen(navController)
         }
     }
 }

@@ -12,17 +12,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.monkode.cattus.ui.components.topbar.DefaultTopAppBar
 import com.monkode.cattus.ui.theme.Black400
 
 @Composable
 fun BaseScreen(
     onNavItemClick: (String) -> Unit,
     currentScreen: String = "",
+    topBar: @Composable (() -> Unit)? = { DefaultTopAppBar() },
     backgroundColor: Color = Black400,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
-        topBar = { CatsTopAppBar() },
+        topBar = { topBar?.invoke() },
         bottomBar = { BottomMenu(onNavItemClick = onNavItemClick, currentScreen) },
         content = { paddingValues ->
             Column(

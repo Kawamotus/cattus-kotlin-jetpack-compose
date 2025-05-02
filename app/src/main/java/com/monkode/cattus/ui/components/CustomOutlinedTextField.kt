@@ -16,7 +16,9 @@ import com.monkode.cattus.ui.theme.Gray400
 fun CustomOutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    label: String,
+    label: String = "",
+    width: Int = 300,
+    placeholder: String = "",
     visualTransformation: VisualTransformation = VisualTransformation.None,
     modifier: Modifier = Modifier,
     textStyle: TextStyle = TextStyle.Default.copy(fontSize = 18.sp)
@@ -26,7 +28,7 @@ fun CustomOutlinedTextField(
         onValueChange = onValueChange,
         label = { Text(label) },
         shape = RoundedCornerShape(8.dp),
-        modifier = modifier.width(300.dp),
+        modifier = modifier.width(width.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             backgroundColor = Gray400,
             focusedBorderColor = Gray400,
@@ -34,9 +36,11 @@ fun CustomOutlinedTextField(
             textColor = Gray100,
             cursorColor = Gray100,
             focusedLabelColor = Gray100,
-            unfocusedLabelColor = Gray100
+            unfocusedLabelColor = Gray100,
+            placeholderColor = Gray100
         ),
         textStyle = textStyle,
         visualTransformation = visualTransformation,
+        placeholder = { Text(placeholder) }
     )
 }

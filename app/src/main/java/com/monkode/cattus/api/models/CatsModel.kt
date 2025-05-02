@@ -18,7 +18,7 @@ data class CatData(
     val petComorbidities: String? = null,
     val company: Company? = null,
     val petStatus: PetStatus? = null,
-    val petVaccines: List<String> = emptyList()
+    val petVaccines: List<String>? = emptyList()
 )
 
 data class PetCharacteristics(
