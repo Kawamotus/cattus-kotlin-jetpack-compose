@@ -6,6 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.monkode.cattus.ui.screens.LoginScreen
 import com.monkode.cattus.ui.screens.MainScreen
+import com.monkode.cattus.ui.screens.cat.register.HomeRegister
+import com.monkode.cattus.ui.screens.cat.register.MainCatRegister
 
 @Composable
 fun Navigation() {
@@ -17,6 +19,9 @@ fun Navigation() {
         }
         composable("mainscreen") {
             MainScreen(navController)
+        }
+        composable("cat_register") {
+            MainCatRegister()
         }
     }
 }

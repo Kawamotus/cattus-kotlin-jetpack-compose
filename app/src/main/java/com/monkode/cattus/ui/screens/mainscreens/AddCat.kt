@@ -9,16 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.monkode.cattus.ui.screens.cat.register.HomeRegister
 import com.monkode.cattus.ui.theme.Purple400
 import com.monkode.cattus.ui.theme.White000
 
 @Composable
 fun AddCat(navController: NavController) {
-    Column(
-        Modifier.background(color = Purple400).fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Add Cat")
-    }
+    HomeRegister(navController)
 }

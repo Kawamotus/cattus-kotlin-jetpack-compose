@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.monkode.cattus.R
 import com.monkode.cattus.ui.components.CustomButton
 import com.monkode.cattus.ui.theme.Black400
@@ -31,7 +32,7 @@ import com.monkode.cattus.ui.theme.Green300
 import com.monkode.cattus.ui.theme.White000
 
 @Composable
-fun HomeRegister() {
+fun HomeRegister(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -78,7 +79,9 @@ fun HomeRegister() {
         Spacer(modifier = Modifier.height(12.dp))
 
         CustomButton(
-            onClick = {},
+            onClick = {
+                navController.navigate("cat_register")
+            },
             text = "Cadastrar",
             backgroundColor = Green300,
             //icon = Icons.Default.Plus
@@ -91,8 +94,10 @@ fun HomeRegister() {
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun HomeRegisterPreview() {
     HomeRegister()
 }
+*/
