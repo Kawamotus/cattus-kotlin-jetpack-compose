@@ -12,7 +12,7 @@ import com.monkode.cattus.ui.screens.mainscreens.*
 fun MainScreen(navController: NavController) {
     var currentScreen by remember { mutableStateOf("home") }
 
-    BaseScreen(onNavItemClick = {route -> currentScreen = route}, currentScreen, topBar = { DefaultTopAppBar(
+    BaseScreen(onNavItemClick = { route -> currentScreen = route}, currentScreen, topBar = { DefaultTopAppBar(
         when (currentScreen) {
             "home" -> "Home"
             "cats" -> "Gatos"
