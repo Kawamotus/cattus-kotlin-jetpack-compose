@@ -24,6 +24,7 @@ fun CustomButton(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     backgroundColor: Color = Green300,
     textColor: Color = Color.White,
     icon: ImageVector? = null,
@@ -38,7 +39,8 @@ fun CustomButton(
             .padding(top = 8.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = backgroundColor,
-        )
+        ),
+        enabled = enabled
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             icon?.let {

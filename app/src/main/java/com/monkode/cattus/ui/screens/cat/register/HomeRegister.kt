@@ -33,65 +33,74 @@ import com.monkode.cattus.ui.theme.White000
 
 @Composable
 fun HomeRegister(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Black400)
-            .padding(16.dp, 0.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+  Column(
+    modifier = Modifier
+      .fillMaxSize()
+      .background(Black400)
+      .padding(16.dp, 0.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center
+  ) {
+    Image(
+      painter = painterResource(id = R.drawable.register_cat),
+      contentDescription = "Register cat",
+      modifier = Modifier.size(220.dp)
+    )
+
+    Spacer(modifier = Modifier.height(20.dp))
+
+    Text(
+      "O que deseja fazer?",
+      fontSize = 22.sp,
+      style = TextStyle(color = White000, fontWeight = FontWeight.Bold)
+    )
+
+    Spacer(modifier = Modifier.height(12.dp))
+
+    Box(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = 12.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.register_cat),
-            contentDescription = "Register cat",
-            modifier = Modifier.size(220.dp)
+      Column {
+        Text(
+          "O cadastro de gatos possui 5 etapas. As duas primeiras são OBRIGATÓRIAS e inserem o gato no sistema, enquanto as últimas três são opcionais",
+          style = TextStyle(color = White000),
+          fontSize = 16.sp,
+          textAlign = TextAlign.Center
         )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text("O que deseja fazer?", fontSize = 22.sp, style = TextStyle(color = White000, fontWeight = FontWeight.Bold))
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 12.dp)) {
-            Column {
-                Text(
-                    "O cadastro de gatos possui 5 etapas. As duas primeiras são OBRIGATÓRIAS e inserem o gato no sistema, enquanto as últimas três são opcionais",
-                    style = TextStyle(color = White000),
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Text(
-                    "Cadastrar gato inicia um novo cadastro.\n" +
-                            "Concluir cadastro retoma o registro de um gato já cadastrado.",
-                    style = TextStyle(color = White000),
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        CustomButton(
-            onClick = {
-                navController.navigate("cat_register")
-            },
-            text = "Cadastrar",
-            backgroundColor = Green300,
-            //icon = Icons.Default.Plus
+        Text(
+          "Cadastrar gato inicia um novo cadastro.\n" +
+                  "Concluir cadastro retoma o registro de um gato já cadastrado.",
+          style = TextStyle(color = White000),
+          fontSize = 16.sp,
+          textAlign = TextAlign.Center
         )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text("Concluir cadastro", style = TextStyle(color = White000, fontSize = 16.sp, fontWeight = FontWeight.Bold))
-
+      }
     }
+
+    Spacer(modifier = Modifier.height(12.dp))
+
+    CustomButton(
+      onClick = {
+        navController.navigate("cat_register")
+      },
+      text = "Cadastrar",
+      backgroundColor = Green300,
+      //icon = Icons.Default.Plus
+    )
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    Text(
+      "Concluir cadastro",
+      style = TextStyle(color = White000, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+    )
+
+  }
 }
 
 /*

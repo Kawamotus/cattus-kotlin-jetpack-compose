@@ -1,5 +1,7 @@
 package com.monkode.cattus.api.models
 
+import android.net.Uri
+
 data class GetAllCats(
     val ok: Boolean,
     val result: List<CatData>
