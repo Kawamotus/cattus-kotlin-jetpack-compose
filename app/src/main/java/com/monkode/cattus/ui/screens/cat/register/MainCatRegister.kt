@@ -40,10 +40,14 @@ fun MainCatRegister(navController: NavController) {
         title = "Cadastrar Gato",
         currentStep = step,
         totalSteps = 5,
-        onBackClick = { if (step > 1) step-- else {navController.navigate("mainscreen")}} )
+        onBackClick = {
+          if (step > 1) step-- else {
+            navController.navigate("mainscreen")
+          }
+        })
     }
   ) { paddingValues ->
-    Column(modifier = Modifier.padding(paddingValues)) {
+    Column(modifier = Modifier.padding()) {
       Spacer(modifier = Modifier.height(16.dp))
       LinearProgressIndicator(
         progress = progress,
@@ -73,6 +77,15 @@ fun MainCatRegister(navController: NavController) {
             selectedImageUri = uri
           }
         )
+
+        3 -> RegisterStepThree(
+          catData = catRegistrationData,
+          onDataChange = { updatedData -> catRegistrationData = updatedData },
+          onProceedClick = {
+            if (step < totalSteps) {
+              step++
+            }
+          })
 
       }
 

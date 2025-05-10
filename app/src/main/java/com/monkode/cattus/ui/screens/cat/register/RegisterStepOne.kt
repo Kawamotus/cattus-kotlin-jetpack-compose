@@ -168,7 +168,6 @@ fun RegisterStepOne(
 
     CustomButton(
       onClick = {
-        Log.d("r1", "click")
         onProceedClick()
       },
       text = "Continuar",
