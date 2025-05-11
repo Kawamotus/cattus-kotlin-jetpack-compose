@@ -17,7 +17,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.monkode.cattus.api.viewmodel.GetAllCatsViewModel
 import com.monkode.cattus.storage.SessionManager
-import com.monkode.cattus.ui.components.cat.list.CatGrid
+import com.monkode.cattus.ui.components.cats.list.CatFilterHeader
+import com.monkode.cattus.ui.components.cats.list.CatGrid
 import com.monkode.cattus.ui.screens.LoadingScreen
 import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.White000
@@ -47,21 +48,24 @@ fun CatsList(navController: NavController, getAllCatsViewModel: GetAllCatsViewMo
     Column(
         Modifier.background(color = White000).fillMaxSize().background(Black400),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        CatFilterHeader(
+            selectedFilter = "Todos",
+            resultCount = cats?.size ?: 0,
+            onSearchClick = { /* lógica da busca */ },
+            onFilterClick = { /* lógica do filtro */ },
+            onFilterButtonClick = { /* abrir seleção de filtros */ }
+        )
         when {
             cats == null -> {
-                Log.d("LazyCardCat", "Mostrando estado de loading")
                 LoadingScreen()
             }
             cats?.isEmpty() == true -> {
-                Log.d("LazyCardCat", "Mostrando estado vazio")
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     androidx.compose.material3.Text("Nenhum gato encontrado")
                 }
             }
             else -> {
-                Log.d("LazyCardCat", "Mostrando lista de gatos")
                 CatGrid(cats!!)
             }
         }

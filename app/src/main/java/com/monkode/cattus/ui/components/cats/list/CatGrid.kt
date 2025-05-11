@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components.cat.list
+package com.monkode.cattus.ui.components.cats.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
