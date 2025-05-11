@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +29,7 @@ import com.monkode.cattus.ui.theme.White000
 fun CustomDropdownField(
   label: String,
   value: String,
+  placeholder: String = "",
   options: List<String>,
   onOptionSelected: (String) -> Unit
 ) {
@@ -42,7 +44,7 @@ fun CustomDropdownField(
     CustomTextField(
       value = value,
       onValueChange = {}, // readOnly = true
-      placeholderText = "sim/nao",
+      placeholderText = placeholder,
       readOnly = true,
       trailingIcon = {
         ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
