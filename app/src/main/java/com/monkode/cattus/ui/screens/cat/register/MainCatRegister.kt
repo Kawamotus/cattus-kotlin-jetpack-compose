@@ -87,6 +87,15 @@ fun MainCatRegister(navController: NavController) {
             }
           })
 
+        4 -> RegisterStepFour(
+          catData = catRegistrationData,
+          onDataChange = { updatedData -> catRegistrationData = updatedData },
+          onProceedClick = {
+            if (step < totalSteps) {
+              step++
+            }
+          })
+
       }
 
     }
