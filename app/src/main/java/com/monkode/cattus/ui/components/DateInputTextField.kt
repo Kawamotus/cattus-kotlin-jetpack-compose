@@ -3,8 +3,10 @@ package com.monkode.cattus.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -29,12 +31,15 @@ fun DateInputField(
             .fillMaxWidth()
             .background(Gray400, RoundedCornerShape(8.dp))
             .clickable { onClick() }
-            .padding(16.dp)
+            .padding(16.dp),
+        //contentAlignment = Alignment.Center
     ) {
         Text(
             text = if (value.isNotEmpty()) value else placeholder,
-            color = if (value.isNotEmpty()) White000 else Gray100
+            color = if (value.isNotEmpty()) White000 else Gray100,
+            modifier = Modifier.align(Alignment.CenterStart)
         )
+        Spacer(modifier = Modifier.width(4.dp))
         Icon(
             imageVector = Icons.Default.CalendarMonth,
             contentDescription = "Ícone de calendário",

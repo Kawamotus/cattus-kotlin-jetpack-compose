@@ -15,11 +15,13 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     readOnly: Boolean = false,
+    singleLine: Boolean = true,
     enabled: Boolean = true,
     modifier: Modifier = Modifier,
     label: String? = null,
     placeholderText: String? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
+
 ) {
     TextField(
         value = value,
@@ -47,6 +49,7 @@ fun CustomTextField(
         ),
         trailingIcon = trailingIcon,
         readOnly = readOnly,
-        enabled = enabled
+        enabled = enabled,
+        singleLine = singleLine
     )
 }

@@ -96,6 +96,11 @@ fun MainCatRegister(navController: NavController) {
             }
           })
 
+        5 -> RegisterStepFive(
+          catData = catRegistrationData,
+          onDataChange = { updatedData -> catRegistrationData = updatedData }
+        )
+
       }
 
     }

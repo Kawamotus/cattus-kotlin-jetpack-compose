@@ -161,7 +161,8 @@ fun RegisterStepOne(
       },
       modifier = Modifier
         .height(140.dp)
-        .fillMaxWidth()
+        .fillMaxWidth(),
+      singleLine = false
     )
 
     Spacer(modifier = Modifier.height(28.dp))
