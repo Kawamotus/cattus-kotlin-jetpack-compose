@@ -165,7 +165,7 @@ fun RegisterStepOne(
       singleLine = false
     )
 
-    Spacer(modifier = Modifier.height(28.dp))
+    Spacer(modifier = Modifier.weight(1f))
 
     CustomButton(
       onClick = {
@@ -174,5 +174,7 @@ fun RegisterStepOne(
       text = "Continuar",
       modifier = Modifier.fillMaxWidth()
     )
+
+    Spacer(modifier = Modifier.height(8.dp))
   }
 }

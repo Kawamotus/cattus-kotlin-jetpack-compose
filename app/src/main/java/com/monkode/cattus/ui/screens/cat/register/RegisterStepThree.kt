@@ -152,7 +152,7 @@ fun RegisterStepThree(
       modifier = Modifier.fillMaxWidth()
     )
 
-    Spacer(modifier = Modifier.height(28.dp))
+    Spacer(modifier = Modifier.weight(1f))
 
     CustomButton(
       onClick = {
@@ -161,6 +161,8 @@ fun RegisterStepThree(
       text = "Continuar",
       modifier = Modifier.fillMaxWidth()
     )
+
+    Spacer(modifier = Modifier.height(8.dp))
 
   }
 }

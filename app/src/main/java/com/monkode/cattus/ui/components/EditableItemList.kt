@@ -118,6 +118,7 @@ fun EditableItemList(
               )
             }
           },
+          modifier = Modifier.height(32.dp),
           colors = InputChipDefaults.inputChipColors(
             selectedContainerColor = Purple400,
             selectedLabelColor = White000,
@@ -128,6 +129,8 @@ fun EditableItemList(
       }
 
     }
+
+    Spacer(modifier = Modifier.height(8.dp))
 
   }
 
