@@ -21,7 +21,7 @@ import com.monkode.cattus.api.config.RetrofitClient
 import com.monkode.cattus.api.interfaces.GetAllCatsInterface
 import com.monkode.cattus.api.repositories.CatsRepository
 import com.monkode.cattus.api.viewmodel.GetAllCatsViewModel
-import com.monkode.cattus.api.viewmodel.GetAllCatsViewModelFactory
+import com.monkode.cattus.api.viewmodel.factory.GetAllCatsViewModelFactory
 import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.storage.UserDataManager
 import com.monkode.cattus.ui.components.cats.list.CatFilterHeader

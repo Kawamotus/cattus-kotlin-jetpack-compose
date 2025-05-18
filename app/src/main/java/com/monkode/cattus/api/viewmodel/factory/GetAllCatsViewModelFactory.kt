@@ -1,8 +1,9 @@
-package com.monkode.cattus.api.viewmodel
+package com.monkode.cattus.api.viewmodel.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.monkode.cattus.api.repositories.CatsRepository
+import com.monkode.cattus.api.viewmodel.GetAllCatsViewModel
 
 class GetAllCatsViewModelFactory(
   private val repository: CatsRepository
