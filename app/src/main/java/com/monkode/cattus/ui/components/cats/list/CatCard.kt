@@ -36,136 +36,106 @@ import com.monkode.cattus.ui.theme.Purple400
 import com.monkode.cattus.ui.theme.White000
 import com.monkode.cattus.R
 import com.monkode.cattus.api.models.CatData
+import com.monkode.cattus.ui.theme.Gray100
+import com.monkode.cattus.ui.theme.Green400
+import com.monkode.cattus.ui.theme.Red400
+import com.monkode.cattus.ui.theme.Yellow300
 
 @Composable
-fun CardCat(cat: CatData) { //passar os dados do gato como parametro pra montar o card
+fun CardCat(cat: CatData) {
 
-    Card( //adicionar parametros e deixar tudo dinâmico
+  val petStatusColor = when (cat.petStatus?.petCurrentStatus) {
+    "0" -> {
+      Green400
+    }
+
+    "1" -> {
+      Yellow300
+    }
+
+    "2" -> {
+      Red400
+    }
+
+    else -> {
+      Gray100
+    }
+  }
+
+  Card( //adicionar parametros e deixar tudo dinâmico
+    modifier = Modifier
+      .padding(8.dp)
+      .width(160.dp)
+      .border(
+        2.dp,
+        petStatusColor,
+        RoundedCornerShape(8.dp)
+      ),
+    shape = RoundedCornerShape(8.dp),
+    elevation = CardDefaults.cardElevation(4.dp)
+  ) {
+
+
+    Box(modifier = Modifier
+      .height(180.dp)
+      .background(Black400)) {
+      val context = LocalContext.current
+      val hasImage = !cat.petPicture.isNullOrBlank()
+
+      if (hasImage) {
+        AsyncImage(
+          model = ImageRequest.Builder(context)
+            .data(cat.petPicture)
+            .crossfade(true)
+            .build(),
+          contentDescription = cat.petName,
+          contentScale = ContentScale.Crop,
+          modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp))
+        )
+      } else {
+        Image(
+          painter = painterResource(id = R.drawable.cat_test),
+          contentDescription = "Imagem padrão do gato",
+          contentScale = ContentScale.Crop,
+          modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp))
+        )
+      }
+
+      Icon(
+        imageVector = Icons.Default.Circle,
+        contentDescription = "Estrela do pt",
+        tint = petStatusColor,
         modifier = Modifier
-            .padding(8.dp)
-            .width(160.dp)
-            .border(2.dp, Color.Green, RoundedCornerShape(8.dp)),
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+          .align(Alignment.TopStart)
+          .padding(8.dp)
+      )
+
+      Icon(
+        imageVector = Icons.Default.Star,
+        contentDescription = "Estrela",
+        tint = Color.Yellow, //colocar condicional pra favorito depois
+        modifier = Modifier
+          .align(Alignment.TopEnd)
+          .padding(6.dp)
+      )
+    }
+    Box(
+      modifier = Modifier
+        .fillMaxWidth()
+        .background(Color.Black) // 👈 Aqui você muda a cor de fundo para preto
+        .padding(8.dp)
     ) {
-        Box(modifier = Modifier.height(180.dp).background(Black400)) {
-            val context = LocalContext.current
-            val hasImage = !cat.petPicture.isNullOrBlank()
-
-            if (hasImage) {
-                AsyncImage(
-                    model = ImageRequest.Builder(context)
-                        .data(cat.petPicture)
-                        .crossfade(true)
-                        .build(),
-                    contentDescription = cat.petName,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp))
-                )
-            } else {
-                Image(
-                    painter = painterResource(id = R.drawable.cat_test),
-                    contentDescription = "Imagem padrão do gato",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp))
-                )
-            }
-
-            Icon(
-                imageVector = Icons.Default.Circle,
-                contentDescription = "Estrela do pt",
-                tint = Purple400, //colocar condicional pra favorito depois
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(8.dp)
-            )
-
-            Icon(
-                imageVector = Icons.Default.Star,
-                contentDescription = "Estrela do pt",
-                tint = Color.Yellow, //colocar condicional pra favorito depois
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(6.dp)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Black) // 👈 Aqui você muda a cor de fundo para preto
-                .padding(8.dp)
-        ) {
-            Column(modifier = Modifier.padding(0.dp)) {
-                Text(cat.petName!!, fontSize = 12.sp, style = TextStyle(color = White000))
-                Text("${cat.petGender}", fontSize = 12.sp, style = TextStyle(color = White000))
-                Text("CID: ${cat._id}", fontSize = 12.sp, style = TextStyle(color = White000))
-            }
-        }
-
+      Column(modifier = Modifier.padding(0.dp)) {
+        Text(cat.petName!!, fontSize = 12.sp, style = TextStyle(color = White000))
+        Text("${cat.petGender}", fontSize = 12.sp, style = TextStyle(color = White000))
+        Text("CID: ${cat._id}", fontSize = 12.sp, style = TextStyle(color = White000))
+      }
     }
+
+  }
 
 }
-
-
-
-/*
-@Composable
-fun LazyCardCat(getAllCatsViewModel: GetAllCatsViewModel = viewModel()) {
-    val cats by getAllCatsViewModel.catsResult.collectAsState()
-    val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        val sessionManager = SessionManager(context)
-        val token = sessionManager.getToken()
-        if (token != null) {
-            getAllCatsViewModel.getCats(
-                context = context,
-                token = token,
-                onError = { error ->
-                    Log.e("LazyCardCat", "Erro ao carregar gatos: $error")
-                }
-            )
-        } else {
-            Log.e("LazyCardCat", "Token é nulo!")
-        }
-    }
-
-    Log.d("LazyCardCat", "Estado atual: ${if (cats == null) "Loading" else "Dados carregados (${cats?.size ?: 0} itens)"}")
-
-    when {
-        cats == null -> {
-            Log.d("LazyCardCat", "Mostrando estado de loading")
-            LoadingScreen()
-        }
-        cats?.isEmpty() == true -> {
-            Log.d("LazyCardCat", "Mostrando estado vazio")
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Nenhum gato encontrado")
-            }
-        }
-        else -> {
-            Log.d("LazyCardCat", "Mostrando lista de gatos")
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier
-                    .background(White000)
-                    .fillMaxSize()
-                    .padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                cats?.let { catList ->
-                    items(catList.size) { index ->
-                        CardCat(cat = catList[index])
-                    }
-                }
-            }
-        }
-    }
-}
-
-*/
