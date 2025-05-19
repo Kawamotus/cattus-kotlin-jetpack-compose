@@ -20,14 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.monkode.cattus.api.models.CatData
 import com.monkode.cattus.ui.components.cats.detail.CatProfileDetails
 import com.monkode.cattus.ui.theme.Black400
-import com.monkode.cattus.ui.theme.Gray100
 import com.monkode.cattus.ui.theme.White000
 
 @Composable
