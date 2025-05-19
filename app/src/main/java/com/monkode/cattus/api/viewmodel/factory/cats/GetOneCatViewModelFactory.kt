@@ -1,17 +1,17 @@
-package com.monkode.cattus.api.viewmodel.factory
+package com.monkode.cattus.api.viewmodel.factory.cats
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.monkode.cattus.api.repositories.CatsRepository
-import com.monkode.cattus.api.viewmodel.GetAllCatsViewModel
+import com.monkode.cattus.api.viewmodel.cats.GetOneCatViewModel
 
-class GetAllCatsViewModelFactory(
+class GetOneCatViewModelFactory(
   private val repository: CatsRepository
 ): ViewModelProvider.Factory {
   @Suppress("UNCHECKED_CAST")
   override fun <T : ViewModel> create(modelClass: Class<T>): T {
-    if(modelClass.isAssignableFrom(GetAllCatsViewModel::class.java)) {
-      return GetAllCatsViewModel(repository) as T
+    if(modelClass.isAssignableFrom(GetOneCatViewModel::class.java)) {
+      return GetOneCatViewModel(repository) as T
     }
 
     throw IllegalArgumentException("Unknown ViewModel Class")

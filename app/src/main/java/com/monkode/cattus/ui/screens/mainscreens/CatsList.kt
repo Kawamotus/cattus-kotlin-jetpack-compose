@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -34,8 +33,8 @@ import com.monkode.cattus.api.config.RetrofitClient
 import com.monkode.cattus.api.interfaces.CatsApiService
 import com.monkode.cattus.api.models.CatData
 import com.monkode.cattus.api.repositories.CatsRepository
-import com.monkode.cattus.api.viewmodel.GetAllCatsViewModel
-import com.monkode.cattus.api.viewmodel.factory.GetAllCatsViewModelFactory
+import com.monkode.cattus.api.viewmodel.cats.GetAllCatsViewModel
+import com.monkode.cattus.api.viewmodel.factory.cats.GetAllCatsViewModelFactory
 import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.storage.UserDataManager
 import com.monkode.cattus.ui.components.cats.list.CatFilterHeader

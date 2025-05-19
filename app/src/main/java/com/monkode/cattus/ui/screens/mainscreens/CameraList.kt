@@ -8,7 +8,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -17,8 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import com.monkode.cattus.api.config.RetrofitClient
 import com.monkode.cattus.api.interfaces.CatsApiService
 import com.monkode.cattus.api.repositories.CatsRepository
-import com.monkode.cattus.api.viewmodel.GetOneCatViewModel
-import com.monkode.cattus.api.viewmodel.factory.GetOneCatViewModelFactory
+import com.monkode.cattus.api.viewmodel.cats.GetOneCatViewModel
+import com.monkode.cattus.api.viewmodel.factory.cats.GetOneCatViewModelFactory
 import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.storage.UserDataManager
 import com.monkode.cattus.ui.screens.LoadingScreen

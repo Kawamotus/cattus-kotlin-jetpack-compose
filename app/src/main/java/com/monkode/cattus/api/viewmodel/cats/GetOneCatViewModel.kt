@@ -1,4 +1,4 @@
-package com.monkode.cattus.api.viewmodel
+package com.monkode.cattus.api.viewmodel.cats
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
