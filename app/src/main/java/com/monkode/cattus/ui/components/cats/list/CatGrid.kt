@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.monkode.cattus.api.models.CatData
 
 @Composable
-fun CatGrid(cats: List<CatData>) {
+fun CatGrid(cats: List<CatData>, onCatClick: (CatData) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize(),
@@ -21,7 +21,7 @@ fun CatGrid(cats: List<CatData>) {
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(cats){ cat ->
-            CardCat(cat!!)
+            CardCat(cat!!, onClick = { onCatClick(cat) })
         }
     }
 }

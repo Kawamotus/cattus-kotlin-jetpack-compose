@@ -9,9 +9,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.monkode.cattus.api.models.CatData
 
 @Composable
-fun CatProfileDetails(){
+fun CatProfileDetails(cat: CatData){
   Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
     Text("Observacoes")
     Spacer(modifier = Modifier.height(8.dp))

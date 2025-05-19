@@ -3,6 +3,7 @@ package com.monkode.cattus.ui.components.cats.list
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,7 +43,7 @@ import com.monkode.cattus.ui.theme.Red400
 import com.monkode.cattus.ui.theme.Yellow300
 
 @Composable
-fun CardCat(cat: CatData) {
+fun CardCat(cat: CatData, onClick: (CatData) -> Unit) {
 
   val petStatusColor = when (cat.petStatus?.petCurrentStatus) {
     "0" -> {
@@ -70,7 +71,8 @@ fun CardCat(cat: CatData) {
         2.dp,
         petStatusColor,
         RoundedCornerShape(8.dp)
-      ),
+      )
+      .clickable { onClick(cat) },
     shape = RoundedCornerShape(8.dp),
     elevation = CardDefaults.cardElevation(4.dp)
   ) {

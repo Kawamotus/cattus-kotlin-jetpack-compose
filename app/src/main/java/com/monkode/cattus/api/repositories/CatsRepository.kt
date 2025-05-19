@@ -1,12 +1,12 @@
 package com.monkode.cattus.api.repositories
 
-import com.monkode.cattus.api.interfaces.GetAllCatsInterface
+import com.monkode.cattus.api.interfaces.CatsApiService
 import com.monkode.cattus.api.models.CatData
 import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.storage.UserDataManager
 
 class CatsRepository(
-  private val apiService: GetAllCatsInterface,
+  private val apiService: CatsApiService,
   private val userDataManager: UserDataManager,
   private val sessionManager: SessionManager
 ) {
@@ -23,6 +23,22 @@ class CatsRepository(
         Result.failure(RuntimeException("Failed to get data from API"))
       }
     } catch(e: Exception) {
+      Result.failure(e)
+    }
+  }
+
+  suspend fun getOneCat(animalId: String): Result<CatData> {
+    val token = sessionManager.getToken()!!
+
+    return try {
+      val response = apiService.getOneCat(animalId, token)
+
+      if(response.ok) {
+        Result.success(response.result)
+      } else {
+        Result.failure(RuntimeException("Failed to get data from API"))
+      }
+    } catch (e: Exception) {
       Result.failure(e)
     }
   }

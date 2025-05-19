@@ -7,6 +7,11 @@ data class GetAllCats(
     val result: List<CatData>
 )
 
+data class GetOneCat(
+    val ok: Boolean,
+    val result: CatData
+)
+
 data class CatData(
     val _id: String? = null,
     val petName: String? = null,
