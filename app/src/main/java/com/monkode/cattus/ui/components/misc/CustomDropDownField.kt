@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.misc
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,10 +17,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.monkode.cattus.ui.components.textfields.CustomTextField
 import com.monkode.cattus.ui.theme.White000
 
 

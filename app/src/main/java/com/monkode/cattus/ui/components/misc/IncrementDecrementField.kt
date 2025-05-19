@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.misc
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.monkode.cattus.ui.theme.Green300
 import com.monkode.cattus.ui.theme.White000
+import java.math.RoundingMode
 
 @Composable
 fun IncrementDecrementField(
@@ -52,7 +53,7 @@ fun IncrementDecrementField(
       Button(
         onClick = {
           val newValue = (value - step).coerceAtLeast(minValue)
-            .toBigDecimal().setScale(1, java.math.RoundingMode.HALF_UP).toDouble()
+            .toBigDecimal().setScale(1, RoundingMode.HALF_UP).toDouble()
           onValueChange(newValue)
         },
         contentPadding = PaddingValues(0.dp),
@@ -78,7 +79,7 @@ fun IncrementDecrementField(
       Button(
         onClick = {
           val newValue = (value + step).coerceAtMost(maxValue)
-            .toBigDecimal().setScale(1, java.math.RoundingMode.HALF_UP).toDouble()
+            .toBigDecimal().setScale(1, RoundingMode.HALF_UP).toDouble()
           onValueChange(newValue)
         },
         contentPadding = PaddingValues(0.dp),

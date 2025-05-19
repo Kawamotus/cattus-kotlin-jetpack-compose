@@ -2,6 +2,7 @@ package com.monkode.cattus.ui.screens.mainscreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
@@ -9,18 +10,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.monkode.cattus.api.config.RetrofitClient
-import com.monkode.cattus.api.interfaces.CatsApiService
-import com.monkode.cattus.api.repositories.CatsRepository
+import com.monkode.cattus.api.interfaces.CamerasApiInterface
+import com.monkode.cattus.api.repositories.CamerasRepository
+import com.monkode.cattus.api.viewmodel.cameras.GetAllCamerasViewModel
 import com.monkode.cattus.api.viewmodel.cats.GetOneCatViewModel
-import com.monkode.cattus.api.viewmodel.factory.cats.GetOneCatViewModelFactory
+import com.monkode.cattus.api.viewmodel.factory.cameras.GetAllCamerasViewModelFactory
 import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.storage.UserDataManager
+import com.monkode.cattus.ui.components.cameras.CameraCountAndSort
+import com.monkode.cattus.ui.components.cameras.CameraFilters
+import com.monkode.cattus.ui.components.cameras.CameraGrid
 import com.monkode.cattus.ui.screens.LoadingScreen
+import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.White000
 
 @Composable
@@ -28,35 +37,44 @@ fun CameraList() {
 
     val context = LocalContext.current.applicationContext
 
-    val getOneCatService = RetrofitClient.getInstance(context).create(CatsApiService::class.java)
+    val getAllCamerasService = RetrofitClient.getInstance(context).create(CamerasApiInterface::class.java)
     val userDataManager = UserDataManager(context)
     val sessionManager = SessionManager(context)
 
-    val repository = CatsRepository(getOneCatService, userDataManager, sessionManager)
-    val factory = GetOneCatViewModelFactory(repository)
+    val repository = CamerasRepository(getAllCamerasService, userDataManager, sessionManager)
+    val factory = GetAllCamerasViewModelFactory(repository)
 
-    val getOneCatViewModel: GetOneCatViewModel = viewModel(factory = factory)
+    val getAllCamerasViewModel: GetAllCamerasViewModel = viewModel(factory = factory)
 
-    val uiState by getOneCatViewModel.uiState.collectAsState()
+    val uiState by getAllCamerasViewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
-        getOneCatViewModel.loadCatDetails("6737d3941745304981dba463")
+        getAllCamerasViewModel.getCameras()
     }
 
+    var cameraQuantity by remember { mutableStateOf(0) }
+
     Column(
-        Modifier.background(color = White000).fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        Modifier.background(color = Black400).fillMaxSize(),
     ) {
-        Text("Camera List")
+        //CameraFilters()
+        CameraCountAndSort(cameraQuantity)
         when (uiState) {
-            is GetOneCatViewModel.CatDetailsUiState.Idle -> LoadingScreen()
-            is GetOneCatViewModel.CatDetailsUiState.Loading -> LoadingScreen()
-            is GetOneCatViewModel.CatDetailsUiState.Success -> {
-                val cat = (uiState as GetOneCatViewModel.CatDetailsUiState.Success).cat
-                Text("${cat.petName}")
+            is GetAllCamerasViewModel.UiState.Idle -> LoadingScreen()
+            is GetAllCamerasViewModel.UiState.Loading -> LoadingScreen()
+            is GetAllCamerasViewModel.UiState.Success -> {
+                val cameras = (uiState as GetAllCamerasViewModel.UiState.Success).cameras
+
+                if(cameras.isEmpty()) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text("Nenhuma camera encontrada")
+                    }
+                } else {
+                    cameraQuantity = cameras.size
+                    CameraGrid(cameras)
+                }
             }
-            is GetOneCatViewModel.CatDetailsUiState.Error -> Text("Nenhum gatinho :(")
+            is GetAllCamerasViewModel.UiState.Error -> Text("Nenhuma camera :(")
         }
     }
 }

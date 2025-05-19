@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.monkode.cattus.api.models.CatData
-import com.monkode.cattus.ui.components.BaseScreen
+import com.monkode.cattus.ui.components.structure.BaseScreen
 import com.monkode.cattus.ui.theme.Green300
 
 @Composable

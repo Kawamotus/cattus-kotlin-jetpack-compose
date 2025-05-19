@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.structure
 
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.foundation.layout.WindowInsets

@@ -19,7 +19,7 @@ class GetAllCamerasViewModel(
   }
 
   private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
-  private val uiState: StateFlow<UiState> = _uiState
+  val uiState: StateFlow<UiState> = _uiState
 
   fun getCameras() {
     if(uiState.value is UiState.Loading) return

@@ -28,7 +28,7 @@ import com.monkode.cattus.api.viewmodel.AuthViewModel
 import com.monkode.cattus.api.viewmodel.UserDataViewModel
 import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.storage.UserDataManager
-import com.monkode.cattus.ui.components.CustomButton
+import com.monkode.cattus.ui.components.misc.CustomButton
 import kotlinx.coroutines.launch
 
 @Composable

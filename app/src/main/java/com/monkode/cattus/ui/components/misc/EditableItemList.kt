@@ -1,11 +1,9 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.misc
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.monkode.cattus.ui.components.textfields.CustomTextField
 import com.monkode.cattus.ui.theme.Green100
 import com.monkode.cattus.ui.theme.Green300
 import com.monkode.cattus.ui.theme.Purple400

@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.misc
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

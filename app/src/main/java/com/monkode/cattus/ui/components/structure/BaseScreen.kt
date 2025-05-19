@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components
+package com.monkode.cattus.ui.components.structure
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.monkode.cattus.ui.components.topbar.DefaultTopAppBar
+import com.monkode.cattus.ui.components.structure.topbar.DefaultTopAppBar
 import com.monkode.cattus.ui.theme.Black400
 
 @Composable

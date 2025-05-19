@@ -1,4 +1,4 @@
-package com.monkode.cattus.ui.components.topbar
+package com.monkode.cattus.ui.components.structure.topbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

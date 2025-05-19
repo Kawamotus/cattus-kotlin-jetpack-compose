@@ -43,7 +43,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.monkode.cattus.ui.components.CustomButton
+import com.monkode.cattus.ui.components.misc.CustomButton
 import com.monkode.cattus.ui.theme.Gray100
 import com.monkode.cattus.ui.theme.Gray400
 import com.monkode.cattus.ui.theme.Purple400

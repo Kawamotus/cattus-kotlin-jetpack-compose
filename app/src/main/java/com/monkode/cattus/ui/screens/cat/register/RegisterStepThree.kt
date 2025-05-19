@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.sp
 import com.monkode.cattus.api.models.CatData
 import com.monkode.cattus.api.models.PetCharacteristics
 import com.monkode.cattus.api.models.PhysicalCharacteristics
-import com.monkode.cattus.ui.components.CustomButton
-import com.monkode.cattus.ui.components.CustomDropdownField
-import com.monkode.cattus.ui.components.CustomTextField
-import com.monkode.cattus.ui.components.IncrementDecrementField
+import com.monkode.cattus.ui.components.misc.CustomButton
+import com.monkode.cattus.ui.components.misc.CustomDropdownField
+import com.monkode.cattus.ui.components.textfields.CustomTextField
+import com.monkode.cattus.ui.components.misc.IncrementDecrementField
 import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.White000
 

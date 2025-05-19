@@ -30,9 +30,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.monkode.cattus.api.models.CatData
-import com.monkode.cattus.ui.components.CustomButton
-import com.monkode.cattus.ui.components.CustomTextField
-import com.monkode.cattus.ui.components.DateInputField
+import com.monkode.cattus.ui.components.misc.CustomButton
+import com.monkode.cattus.ui.components.textfields.CustomTextField
+import com.monkode.cattus.ui.components.misc.DateInputField
 import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.White000
 import java.text.SimpleDateFormat

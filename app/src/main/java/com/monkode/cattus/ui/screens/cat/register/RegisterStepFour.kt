@@ -14,15 +14,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.monkode.cattus.api.models.BehavioralCharacteristics
 import com.monkode.cattus.api.models.CatData
-import com.monkode.cattus.api.models.PetCharacteristics
-import com.monkode.cattus.ui.components.CustomButton
-import com.monkode.cattus.ui.components.CustomDropdownField
-import com.monkode.cattus.ui.components.CustomTextField
+import com.monkode.cattus.ui.components.misc.CustomButton
+import com.monkode.cattus.ui.components.misc.CustomDropdownField
+import com.monkode.cattus.ui.components.textfields.CustomTextField
 import com.monkode.cattus.ui.theme.Black400
 import com.monkode.cattus.ui.theme.White000
 
