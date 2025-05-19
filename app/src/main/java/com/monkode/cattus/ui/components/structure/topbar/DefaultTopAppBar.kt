@@ -75,9 +75,9 @@ fun DefaultTopAppBar(title: String = "Home") {
 //            }
             BadgedBox(
                 badge = {
-                    Badge(modifier = Modifier.offset(x = (-16.dp), y = 12.dp)) {
-                        Text("4")
-                    }
+                    //Badge(modifier = Modifier.offset(x = (-16.dp), y = 12.dp)) {
+                      //  Text("4")
+                    //}
                 }
             ) {
                 IconButton(onClick = { /* deixar dinamico */ }) {
@@ -85,7 +85,7 @@ fun DefaultTopAppBar(title: String = "Home") {
                         Icons.Filled.Notifications,
                         contentDescription = "Notificações",
                         tint = Color.White,
-                        modifier = Modifier.size(32.dp)
+                        modifier = Modifier.size(28.dp)
                     )
                 }
             }

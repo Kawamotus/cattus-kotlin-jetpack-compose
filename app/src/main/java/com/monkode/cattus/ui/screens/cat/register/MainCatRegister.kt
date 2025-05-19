@@ -42,7 +42,7 @@ fun MainCatRegister(navController: NavController) {
         totalSteps = 5,
         onBackClick = {
           if (step > 1) step-- else {
-            navController.navigate("mainscreen")
+            navController.navigate("mainscreen?selectedScreen=add")
           }
         })
     }

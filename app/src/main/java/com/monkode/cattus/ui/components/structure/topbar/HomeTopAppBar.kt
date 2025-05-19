@@ -60,6 +60,7 @@ fun HomeTopAppBar() {
       )
 
       // Badge vermelho
+      /*
       Box(
         modifier = Modifier
           .size(16.dp)
@@ -73,7 +74,7 @@ fun HomeTopAppBar() {
           fontSize = 10.sp,
           fontWeight = FontWeight.Bold
         )
-      }
+      } */
     }
   }
 }

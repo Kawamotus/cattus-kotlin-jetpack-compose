@@ -5,9 +5,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.monkode.cattus.storage.SessionManager
 import com.monkode.cattus.ui.screens.LoadingScreen
 import com.monkode.cattus.ui.screens.LoginScreen
@@ -36,8 +38,19 @@ fun Navigation() {
     composable("login") {
       LoginScreen(navController)
     }
-    composable("mainscreen") {
-      MainScreen(navController)
+    composable(
+      route = "mainscreen?selectedScreen={selectedScreen}",
+      arguments = listOf(
+        navArgument("selectedScreen") {
+          type = NavType.StringType
+          defaultValue = "home"
+          nullable = false
+        }
+      )
+    ) { backStackEntry ->
+      val selectedScreen = backStackEntry.arguments?.getString("selectedScreen")
+
+      MainScreen(navController, selectedScreen!!)
     }
     composable("cat_register") {
       MainCatRegister(navController)
