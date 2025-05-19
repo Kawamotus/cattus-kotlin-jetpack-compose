@@ -12,6 +12,12 @@ data class GetOneCat(
     val result: CatData
 )
 
+data class CreateNewCat(
+    val ok: Boolean,
+    val message: String?,
+    val _id: String?
+)
+
 data class CatData(
     val _id: String? = null,
     val petName: String? = null,
